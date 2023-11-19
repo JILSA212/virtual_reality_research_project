@@ -6,10 +6,13 @@ import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.jogamp.java3d.BoundingSphere;
 import org.jogamp.java3d.BranchGroup;
 import org.jogamp.java3d.Canvas3D;
 import org.jogamp.java3d.TransformGroup;
+import org.jogamp.java3d.utils.behaviors.vp.OrbitBehavior;
 import org.jogamp.java3d.utils.universe.SimpleUniverse;
+import org.jogamp.java3d.utils.universe.ViewingPlatform;
 import org.jogamp.vecmath.Point3d;
 
 public class Main extends JPanel {
@@ -38,7 +41,9 @@ public class Main extends JPanel {
 		
 		SimpleUniverse su = new SimpleUniverse(canvas);    // create a SimpleUniverse
 //		Commons.define_Viewer(su, new Point3d(4.0d, 0.0d, 1.0d));
-		Commons.define_Viewer(su, new Point3d(54.0d, 0.0d, 10.0d));
+		Commons.define_Viewer(su, new Point3d(4.0d, 0.0d, 1.0d));
+		
+		addMouseBehaviors(su, canvas);
 		
 		sceneBG.addChild(Commons.key_Navigation(su));    // allow key navigation
 		sceneBG.compile();		                   // optimize the BranchGroup
@@ -49,6 +54,16 @@ public class Main extends JPanel {
 		frame.setSize(800, 800);                           // set the size of the JFrame
 		frame.setVisible(true);
 	}
+	
+	private void addMouseBehaviors(SimpleUniverse universe, Canvas3D canvas) {
+        ViewingPlatform viewingPlatform = universe.getViewingPlatform();
+
+        // Allow rotation with the mouse
+        OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL);
+        orbit.setSchedulingBounds(new BoundingSphere());
+        viewingPlatform.setViewPlatformBehavior(orbit);
+    }
+
 	
 	public static void main(String[] args)
 	{

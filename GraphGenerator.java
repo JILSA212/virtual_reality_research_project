@@ -26,33 +26,40 @@ public class GraphGenerator {
 	}
 	
 	public TransformGroup generate_graph() {
+//	public BranchGroup generate_graph() {
 		TransformGroup graphTG = new TransformGroup();
+//		BranchGroup graphBG = new BranchGroup();
 		
 		graphTG.addChild(generate_vertices());
-//		graphTG.addChild(generate_edges());
+		graphTG.addChild(generate_edges());
+//		graphBG.addChild(graphTG);
 		
 		return graphTG;
 	}
 	
-	public BranchGroup generate_vertices() {
-		BranchGroup vertexBG = new BranchGroup();
+	public TransformGroup generate_vertices() {
+//	public BranchGroup generate_vertices() {
+//		BranchGroup vertexBG = new BranchGroup();
+		TransformGroup vertexTG = new TransformGroup();
+//		BranchGroup vertexBG = new BranchGroup();
 		n_vertices = new Vertices[vertex_number];
 		Random rand = new Random();
 		
 		for(int i = 0; i < vertex_number; i++) {
-			int x = rand.nextInt(coord_bound);
-			int y = rand.nextInt(coord_bound);
-			int z = rand.nextInt(coord_bound);
-			System.out.println("Adding Vertex number " + i + " with x: " + Integer.toString(x) + "\t y: " + Integer.toString(y) + "\t z: " + Integer.toString(z));
+			double x = rand.nextInt(coord_bound) / (double)coord_bound;
+			double y = rand.nextInt(coord_bound) / (double)coord_bound;
+			double z = rand.nextInt(coord_bound) / (double)coord_bound;
+//			System.out.println("Adding Vertex number " + i + " with x: " + Integer.toString(x) + "\t y: " + Integer.toString(y) + "\t z: " + Integer.toString(z));
 			n_vertices[i] = new Vertex(new Vector3d(x, y, z));
-			vertexBG.addChild(n_vertices[i].position_Object());
+			vertexTG.addChild(n_vertices[i].position_Object());
 		}
+//		vertexBG.addChild(vertexTG);
 		
-		return vertexBG;
+		return vertexTG;
 	}
 	
-	public BranchGroup generate_edges() {
-		BranchGroup edgeBG = new BranchGroup();
+	public TransformGroup generate_edges() {
+		TransformGroup edgeTG = new TransformGroup();
 		n_edges = new Edges[edge_number];
 		Random rand = new Random();
 		
@@ -65,9 +72,9 @@ public class GraphGenerator {
 			
 			System.out.println("Adding Edge number " + i + " between vertex: " + n1 + "\t and " + n2);
 			n_edges[i] = new Edge(n_vertices[n1].get_position(), n_vertices[n2].get_position());
-			edgeBG.addChild(n_edges[i].position_Object());
+			edgeTG.addChild(n_edges[i].position_Object());
 		}
 		
-		return edgeBG;
+		return edgeTG;
 	}
 }

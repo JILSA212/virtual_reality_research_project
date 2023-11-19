@@ -31,6 +31,8 @@ public abstract class Vertices {
 class Vertex extends Vertices {
 	public Vertex(Vector3d position)
 	{
+		this.position = position;
+		System.out.println("Creating a vertex with x :" + position.x + "\ty : " + position.y + "\tz : " + position.z);
 		Transform3D transform = new Transform3D();
 		transform.setTranslation(position);
 		objTG = new TransformGroup(transform);
@@ -38,7 +40,7 @@ class Vertex extends Vertices {
 	}
 	
 	protected Node create_Object() {
-		float radius = 0.3f;
+		float radius = 0.05f;
 		int x_resolution = 30;
 		Appearance app = Commons.obj_Appearance(Commons.White);
 		return new Sphere(radius,Primitive.GENERATE_NORMALS, x_resolution, app);
