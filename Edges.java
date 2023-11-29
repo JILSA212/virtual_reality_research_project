@@ -33,9 +33,6 @@ class Edge extends Edges {
 		this.position1 = position1;
 		this.position2 = position2;
 		
-		System.out.println("Position set: " + this.position1);
-		System.out.println("Position set: " + this.position1);
-		
 		objTG = new TransformGroup();
 		objTG.addChild(create_Object());
 	}

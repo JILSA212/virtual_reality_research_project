@@ -145,9 +145,20 @@ public class Commons extends JPanel {
 			if (i > 0) 
 				adjt = -1f; 
 			ptLight = new PointLight(clr, new Point3f(3.0f * adjt, 1.0f, 3.0f  * adjt), atn);
+			System.out.println("Light position : " + 3.0f * adjt);
 			ptLight.setInfluencingBounds(hundredBS);
 			lightBG.addChild(ptLight);
 		}
+		return lightBG;
+	}
+	
+	public static BranchGroup add_light_at_position(Color3f clr, Point3f point) {
+		BranchGroup lightBG = new BranchGroup();
+		Point3f atn = new Point3f(0.5f, 0.0f, 0.0f);
+		PointLight ptLight;
+		ptLight = new PointLight(clr, point, atn);
+		ptLight.setInfluencingBounds(hundredBS);
+		lightBG.addChild(ptLight);
 		return lightBG;
 	}
 
