@@ -31,8 +31,6 @@ public class random_algorithm {
 		}
 		
 		burning_seq = graphGN.get_centers();
-		System.out.println("Press enter to start the visualization:");
-		scanObj.nextLine();
 		scanObj.close();
 		visualization();
 	}
